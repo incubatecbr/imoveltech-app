@@ -1,16 +1,12 @@
 import React, {Fragment} from 'react';
-import {
+import Routes from './routes';
 
-  View,
-  Text,
-
-} from 'react-native';
 
 const App = () => {
   return (
-    <View>
-      <Text> ImovelTech </Text>
-    </View>
+ 
+      <Routes/>
+    
   );
 };
 
