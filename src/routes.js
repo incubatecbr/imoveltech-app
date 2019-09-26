@@ -1,41 +1,119 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import { createAppContainer } from 'react-navigation';
+import React, { Component } from 'react';
+import { Text, View, Alert } from 'react-native';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+
+import Login from './screens/Login';
+import Home from './screens/Home';
+
+class DashboardScreen extends Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>DashboardScreenss</Text>
+      </View>
+    );
+  }
+}
 
 
-class HomeScreen extends React.Component {
-    render() {
-      return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Home!</Text>
-        </View>
-      );
+
+class Anuncio extends Component {
+  static navigationOptions = {
+    tabBarIcon: ({tintColor, activeTintColor}) => (
+      <Icon name="plus" size={22} color={colorIcons} />
+    )
+  };
+
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Profile</Text>
+      </View>
+    );
+  }
+}
+
+class Perfil extends Component {
+  static navigationOptions = {
+    tabBarIcon: ({tintColor, activeTintColor}) => (
+      <Icon name="user" size={22} color={colorIcons} />
+    )
+  };
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Settings</Text>
+      </View>
+    );
+  }
+}
+
+//-------
+
+const colorIcons = "#f2611d"
+const DashboardTabNavigator = createBottomTabNavigator(
+  {
+    Home,
+    Anuncio,
+    Perfil
+  },
+  {
+    navigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        headerTitle: routeName
+      };
+    },
+    tabBarOptions: {
+      activeBackgroundColor: '#b5b2b0',
+      activeTintColor: colorIcons,
+      labelStyle: {
+        fontSize: 10,
+      },
+      
     }
   }
   
-  class SettingsScreen extends React.Component {
-    render() {
-      return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text>Settings!</Text>
-        </View>
-      );
-    }
-  }
-
-
-const AppNavigator = createBottomTabNavigator(
+);
+const DashboardStackNavigator = createStackNavigator(
   {
-    Login: {screen: HomeScreen},
-    Dashboard: {screen: SettingsScreen},
+    DashboardTabNavigator: DashboardTabNavigator
   },
   {
-    tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
-    },
+    defaultNavigationOptions: ({ navigation }) => {
+      return {
+        headerRight: (
+          <Icon
+            style={{ paddingRight: 10, color: colorIcons }}
+            onPress={() => Alert.alert('Logout..')}
+            name="power-off"
+            size={22}
+          />
+        )
+      };
+    }
   }
-  );
+);
 
-export default createAppContainer(AppNavigator);
+const AppDrawerNavigator = createDrawerNavigator({
+  Dashboard: {
+    screen: DashboardStackNavigator
+  }
+});
+
+const AppSwitchNavigator = createSwitchNavigator({
+  Index: { screen: Login },
+  Dashboard: { screen: AppDrawerNavigator }
+});
+
+const AppContainer = createAppContainer(AppSwitchNavigator);
+
+export default AppContainer;
+
+
+
