@@ -64,13 +64,17 @@ const DashboardTabNavigator = createBottomTabNavigator(
   },
   {
     navigationOptions: ({ navigation }) => {
-      const { routeName } = navigation.state.routes[navigation.state.index];
+      //const { routeName } = navigation.state.routes[navigation.state.index];
       return {
-        headerTitle: routeName
+        headerStyle: {
+          height: 45,
+        },
+        headerTitle: "ImovelTech",
+        headerTitleStyle: { textAlign: 'center', flex: 1, fontSize: 15},
       };
     },
     tabBarOptions: {
-      activeBackgroundColor: '#b5b2b0',
+      activeBackgroundColor: '#d6d6d6',
       activeTintColor: colorIcons,
       labelStyle: {
         fontSize: 10,
