@@ -9,6 +9,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Login from './screens/Login';
 import Home from './screens/Home';
+import Perfil from './screens/Profile';
 
 
 
@@ -23,21 +24,6 @@ class Anuncio extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Profile</Text>
-      </View>
-    );
-  }
-}
-
-class Perfil extends Component {
-  static navigationOptions = {
-    tabBarIcon: ({tintColor, activeTintColor}) => (
-      <Icon name="user" size={22} color={colorIcons} />
-    )
-  };
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Settings</Text>
       </View>
     );
   }

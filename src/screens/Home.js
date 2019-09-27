@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
       width: Dimensions.get('screen').width - 25, //tamanho da tela - 20px left, right
       borderRadius: 10,
     },
-   
     imgCard:{
       borderTopLeftRadius: 10, 
       borderTopRightRadius: 10,
