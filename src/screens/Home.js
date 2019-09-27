@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
+import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
     StyleSheet,
     Text,
     View,
-    TextInput,
     ScrollView,
     SafeAreaView,
-    Alert, 
-    Image
+    TouchableHighlight, 
+    Image,
+    Alert
   } from 'react-native';
 
-
 export default class Home extends Component {
+
+
     static navigationOptions = {
       tabBarIcon: ({tintColor, activeTintColor}) => (
         <Icon name="home" size={22} color={'#f2611d'} />
@@ -20,30 +22,72 @@ export default class Home extends Component {
     };
   
     render() {
+      //shadow card
+      const shadowCard = {
+        shadowOpacity: 0.34,
+        shadowOffset: {
+          width: 0,
+          height: 5,
+        },
+        shadowColor: '#000',
+        shadowRadius: 6.27,
+        elevation: 10,
+      }
+
       return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
-
                
-                    <View style={styles.card}>
-                        <Image source={require('../images/4.jpg')} style={{height: 130}}/>
-                    </View>
-                    
-                    <View elevation={5} style={styles.buttonContainer}>
-                        <Image source={require('../images/4.jpg')}/>
+                    <View style={[styles.card, shadowCard]}>
+                        <Image source={require('../images/2.jpg')} style={styles.imgCard}/>
+                        <View style={styles.infCard}>
+                          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ 1.700,00</Text>
+                            <Text style={styles.inf}>Código: 657421</Text>
+                          </View>
+                          <Text style={styles.inf}>Av. Souza Naves, 1625 - Ivaiporã - Paraná </Text>
+                          {/* button */}
+                          <TouchableHighlight style={styles.buttonContainer} onPress={() => Alert.alert('click..')}>
+                            <Text style={{color: 'white'}}> + Informações</Text>
+                          </TouchableHighlight>
+                          {/* button */}
+                        </View>
                     </View>
 
-                    <View
-                        style={{
-                            
-                            shadowOpacity: 0.75,
-                            shadowRadius: 5,
-                            shadowColor: 'red',
-                            shadowOffset: { height: 0, width: 0 },
-                        }}
-                        >
-                            <Text> AAAAAAAAAAA    </Text>
+                    
+                    <View  style={[styles.card, shadowCard]}>
+                    <Image source={require('../images/4.jpg')} style={styles.imgCard}/>
+                        <View style={styles.infCard}>
+                          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ 1.700,00</Text>
+                            <Text style={styles.inf}>Código: 657421</Text>
+                          </View>
+                          <Text style={styles.inf}>Av. Souza Naves, 1625 - Ivaiporã - Paraná </Text>
+                          {/* button */}
+                          <TouchableHighlight style={styles.buttonContainer} onPress={() => Alert.alert('click..')}>
+                            <Text style={{color: 'white'}}> + Informações</Text>
+                          </TouchableHighlight>
+                          {/* button */}
                         </View>
+                    </View>
+
+                    <View  style={[styles.card, shadowCard]}>
+                    <Image source={require('../images/1.jpg')} style={styles.imgCard}/>
+                        <View style={styles.infCard}>
+                          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ 1.700,00</Text>
+                            <Text style={styles.inf}>Código: 657421</Text>
+                          </View>
+                          <Text style={styles.inf}>Av. Souza Naves, 1625 - Ivaiporã - Paraná </Text>
+                          {/* button */}
+                          <TouchableHighlight style={styles.buttonContainer} onPress={() => Alert.alert('click..')}>
+                            <Text style={{color: 'white'}}> + Informações</Text>
+                          </TouchableHighlight>
+                          {/* button */}
+                        </View>
+                    </View>
+
+  
 
             </ScrollView>
         </SafeAreaView>
@@ -55,29 +99,52 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // backgroundColor: '#DCDCDC',
+        backgroundColor: '#FFF',
     },
     card:{
-        margin: 10,
-        borderWidth: 1,
-        borderRadius: 3,
-        height: 230,
-
+      backgroundColor: '#FFF',
+      margin: 10,
+      height: 230,
+      width: Dimensions.get('screen').width - 25, //tamanho da tela - 20px left, right
+      borderRadius: 10,
+    },
+   
+    imgCard:{
+      borderTopLeftRadius: 10, 
+      borderTopRightRadius: 10,
+      height: 130,
+      width: 'auto', 
+    },
+    infCard:{
+      margin: 10,
     },
     buttonContainer: {
-        //backgroundColor: '#2E9298',
-        //borderRadius: 10,
-        
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 1,
-            height: 2,
-        },
-        shadowOpacity: 0.8,
-        shadowRadius: 3,
-      }
+      backgroundColor: "#f2611d",
+      height: 30,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 10,
+      marginHorizontal: 25,
+      width: '100%',
+      borderRadius: 5,
+      alignSelf: 'center',
+    },
+    inf:{
+      color: '#808080',
+      fontSize: 14,
+    },
+    shaw:{
+      shadowOpacity: 0.30,
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      shadowColor: '#000',
+      shadowRadius: 4.6,
+      elevation: 8,
+    },
+    
+    
     
 });

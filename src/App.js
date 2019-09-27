@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Routes from './routes';
-//console.disableYellowBox = true;//disable Warning Messages
+console.disableYellowBox = true;//disable Warning Messages
 
 class App extends Component {
   render() {

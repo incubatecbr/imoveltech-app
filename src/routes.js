@@ -10,16 +10,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Login from './screens/Login';
 import Home from './screens/Home';
 
-class DashboardScreen extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>DashboardScreenss</Text>
-      </View>
-    );
-  }
-}
-
 
 
 class Anuncio extends Component {
