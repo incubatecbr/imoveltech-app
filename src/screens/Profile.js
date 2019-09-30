@@ -7,7 +7,8 @@ import {
     ScrollView,
     SafeAreaView,
     TouchableHighlight, 
-    FlatList
+    FlatList,
+    Alert
   } from 'react-native';
 
 export default class Profile extends Component {
@@ -32,14 +33,6 @@ export default class Profile extends Component {
                 id: 3,
                 title: 'Casa 3',
             },
-            {
-                id: 4,
-                title: 'Casa 4',
-            },
-            {
-                id: 5,
-                title: 'Casa 5',
-            },
         ];
      
       return (
@@ -48,23 +41,20 @@ export default class Profile extends Component {
                 <View style={styles.user}>
                     <Icon name="user-circle" size={60} color={'#f2611d'} style={styles.imgUser}/>
                     <Text style={styles.nameUser}> Nome Usuario </Text> 
-                    <Text style={styles.nameUser}> Imóveis anunciados: 0 </Text> 
+                    <Text style={styles.nameUser}> Imóveis anunciados: {data.length} </Text> 
                 </View>
                 <FlatList
                     data={data}
-                    
                     renderItem={({ item }) => (
                         <View style={styles.item}>
-                             <Text style={styles.text}> {item.title} </Text> 
+                            <Text style={styles.text}> {item.title} </Text>
+                            <Icon name="trash-o" size={20} color={'#f2611d'} onPress={() => Alert.alert('excluir '+item.title+'?')}/> 
                         </View>
-                       
                     )}
                     keyExtractor={item => item.id}
                 />
             </ScrollView>
         </SafeAreaView>
-        
-      
       );
     }
 }
@@ -81,19 +71,18 @@ const styles = StyleSheet.create({
     imgUser:{
         borderRadius: 45,
         backgroundColor: '#FFF',
-        //borderWidth: 1,
-        //alignItems: "center",
         alignSelf: 'center',
-        //marginVertical: 50,
         marginTop: 40,
         marginBottom: 10,
     },
     item: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: "center",
-        backgroundColor: "#ffd1a1",
+        backgroundColor: "#e0dede",
         flexGrow: 1,
         margin: 5,
-        padding: 20
+        padding: 10
     },
     text: {
         color: "#333333"
