@@ -10,24 +10,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Login from './screens/Login';
 import Home from './screens/Home';
 import Perfil from './screens/Profile';
+import NewAd from './screens/NewAd';
 
-
-
-class Anuncio extends Component {
-  static navigationOptions = {
-    tabBarIcon: ({tintColor, activeTintColor}) => (
-      <Icon name="plus" size={22} color={colorIcons} />
-    )
-  };
-
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Profile</Text>
-      </View>
-    );
-  }
-}
 
 //-------
 
@@ -35,7 +19,7 @@ const colorIcons = "#f2611d"
 const DashboardTabNavigator = createBottomTabNavigator(
   {
     Home,
-    Anuncio,
+    NewAd,
     Perfil
   },
   {
