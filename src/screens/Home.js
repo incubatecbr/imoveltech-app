@@ -13,7 +13,8 @@ import {
   } from 'react-native';
 
 export default class Home extends Component {
-
+    componentDidMount(){
+    }
 
     static navigationOptions = {
       tabBarIcon: ({tintColor, activeTintColor}) => (

@@ -1,21 +1,42 @@
 import React, { Component } from 'react';
-
 import { SafeAreaView, ScrollView, View, StyleSheet, Text, TextInput, TouchableOpacity, TouchableHighlight, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default class NewAd extends Component {    
+
+import { openDatabase } from 'react-native-sqlite-storage';
+//Connction to access the pre-populated user_db.db '~/www/testeDB.db'
+var db = openDatabase({ name: 'testeDB.db',  createFromLocation: 1,});
+
+
+export default class NewAd extends Component {   
+    constructor(props) {
+        super(props);
+        this.state = {
+          checkPool: null,
+          FlatListItems: [],
+        };
+        db.transaction(tx => {
+            tx.executeSql('SELECT * FROM user', [], (tx, results) => {
+              var temp = [];
+              for (let i = 0; i < results.rows.length; ++i) {
+                temp.push(results.rows.item(i));
+              }
+                console.log(temp);
+                //this.setState({FlatListItems: temp});
+            });
+        });
+    }
+
+
+    
+
     static navigationOptions = {
         tabBarIcon: ({tintColor, activeTintColor}) => (
           <Icon name="plus" size={22} color={'#f2611d'}/>
         )
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          checkPool: null,
-        }
-      }
+
 
   
   render() {
@@ -67,9 +88,17 @@ export default class NewAd extends Component {
                         keyboardType={'numeric'}
                         underlineColorAndroid='transparent'/>
 
-                    <TouchableHighlight style={styles.btn} onPress={() => Alert.alert('ok..')}>
+                    <TouchableHighlight style={styles.btn} onPress={() => {
+                        this.manager.createTable().then( (val) => {
+                            Alert.alert('ok');
+                        }).catch( (err) => { 
+                            Alert.alert('error...');
+                        })
+                    }}>
                         <Text style={{color: 'white'}}> <Icon name="check-square-o" size={14} color={'white'}/> Anunciar</Text>
                     </TouchableHighlight>
+
+                    <Text style={{color: 'blue'}}> {this.state.FlatListItems}</Text>
 
                 </View>
              </ScrollView>
