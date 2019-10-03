@@ -9,7 +9,8 @@ import {
   View,
   TextInput,
   TouchableHighlight,
-  Alert
+  Alert,
+  Image
 } from 'react-native';
 
 
@@ -17,8 +18,8 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username : '',
-      pass: '',
+      username : 'adm',
+      pass: '123',
       errors: 0
     }
   }
@@ -48,6 +49,7 @@ export default class Login extends Component {
   render() {
     return(
       <View style={styles.container}>
+        <Image source={require('../images/logoApp.png')} style={styles.logoApp}/>
         <View style={styles.inputContainer}>
           <Icon name="user" size={24} color={this.state.errors > 0 ? '#e31005': '#90cee0'} style={styles.inputIcon}/>
           <TextInput style={styles.inputs}
@@ -90,6 +92,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#DCDCDC',
+  },
+  logoApp:{
+    width: 200,
+    height: 200,
   },
   inputContainer: {
       borderBottomColor: '#F5FCFF',

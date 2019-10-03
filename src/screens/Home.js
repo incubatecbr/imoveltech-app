@@ -40,7 +40,7 @@ export default class Home extends Component {
             <ScrollView>
                
                     <View style={[styles.card, shadowCard]}>
-                        <Image source={require('../images/2.jpg')} style={styles.imgCard}/>
+                        <Image source={require('../images/casa1.jpg')} style={styles.imgCard}/>
                         <View style={styles.infCard}>
                           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                             <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ 1.700,00</Text>
@@ -57,7 +57,7 @@ export default class Home extends Component {
 
                     
                     <View  style={[styles.card, shadowCard]}>
-                    <Image source={require('../images/4.jpg')} style={styles.imgCard}/>
+                    <Image source={require('../images/casa2.jpg')} style={styles.imgCard}/>
                         <View style={styles.infCard}>
                           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                             <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ 1.700,00</Text>
@@ -73,7 +73,7 @@ export default class Home extends Component {
                     </View>
 
                     <View  style={[styles.card, shadowCard]}>
-                    <Image source={require('../images/1.jpg')} style={styles.imgCard}/>
+                    <Image source={require('../images/casa3.jpg')} style={styles.imgCard}/>
                         <View style={styles.infCard}>
                           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                             <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ 1.700,00</Text>
