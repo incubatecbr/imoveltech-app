@@ -11,6 +11,7 @@ import {
     Image,
     Alert
   } from 'react-native';
+import Card from '../components/Card';
 
 export default class Home extends Component {
     componentDidMount(){
@@ -23,77 +24,14 @@ export default class Home extends Component {
     };
   
     render() {
-      //shadow card
-      const shadowCard = {
-        shadowOpacity: 0.34,
-        shadowOffset: {
-          width: 0,
-          height: 5,
-        },
-        shadowColor: '#000',
-        shadowRadius: 6.27,
-        elevation: 10,
-      }
-
       return (
         <SafeAreaView style={styles.container}>
-            <ScrollView>
-               
-                    <View style={[styles.card, shadowCard]}>
-                        <Image source={require('../images/casa1.jpg')} style={styles.imgCard}/>
-                        <View style={styles.infCard}>
-                          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                            <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ 1.700,00</Text>
-                            <Text style={styles.inf}>Código: 657421</Text>
-                          </View>
-                          <Text style={styles.inf}>Av. Souza Naves, 1625 - Ivaiporã - Paraná </Text>
-                          {/* button */}
-                          <TouchableHighlight style={styles.buttonContainer} onPress={() => Alert.alert('click..')}>
-                            <Text style={{color: 'white'}}> + Informações</Text>
-                          </TouchableHighlight>
-                          {/* button */}
-                        </View>
-                    </View>
-
-                    
-                    <View  style={[styles.card, shadowCard]}>
-                    <Image source={require('../images/casa2.jpg')} style={styles.imgCard}/>
-                        <View style={styles.infCard}>
-                          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                            <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ 1.700,00</Text>
-                            <Text style={styles.inf}>Código: 657421</Text>
-                          </View>
-                          <Text style={styles.inf}>Av. Souza Naves, 1625 - Ivaiporã - Paraná </Text>
-                          {/* button */}
-                          <TouchableHighlight style={styles.buttonContainer} onPress={() => Alert.alert('click..')}>
-                            <Text style={{color: 'white'}}> + Informações</Text>
-                          </TouchableHighlight>
-                          {/* button */}
-                        </View>
-                    </View>
-
-                    <View  style={[styles.card, shadowCard]}>
-                    <Image source={require('../images/casa3.jpg')} style={styles.imgCard}/>
-                        <View style={styles.infCard}>
-                          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                            <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ 1.700,00</Text>
-                            <Text style={styles.inf}>Código: 657421</Text>
-                          </View>
-                          <Text style={styles.inf}>Av. Souza Naves, 1625 - Ivaiporã - Paraná </Text>
-                          {/* button */}
-                          <TouchableHighlight style={styles.buttonContainer} onPress={() => Alert.alert('click..')}>
-                            <Text style={{color: 'white'}}> + Informações</Text>
-                          </TouchableHighlight>
-                          {/* button */}
-                        </View>
-                    </View>
-
-  
-
-            </ScrollView>
+          <ScrollView>
+            <Card imgPath={require('../images/casa1.jpg')} price="260.000,00" end="Av. Teste teste teste, 2525, Ivp" cod="456465" />
+            <Card imgPath={require('../images/casa2.jpg')} price="140.000,00" end="Av. Teste teste teste, 2525, Ivp" cod="054451" />
+            <Card imgPath={require('../images/casa3.jpg')} price="388.000,00" end="Av. Teste teste teste, 2525, Ivp" cod="654665" />
+          </ScrollView>
         </SafeAreaView>
-        
-      
       );
     }
 }
@@ -102,49 +40,4 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF',
     },
-    card:{
-      backgroundColor: '#FFF',
-      margin: 10,
-      height: 230,
-      width: Dimensions.get('screen').width - 25, //tamanho da tela - 20px left, right
-      borderRadius: 10,
-    },
-    imgCard:{
-      borderTopLeftRadius: 10, 
-      borderTopRightRadius: 10,
-      height: 130,
-      width: 'auto', 
-    },
-    infCard:{
-      margin: 10,
-    },
-    buttonContainer: {
-      backgroundColor: "#f2611d",
-      height: 30,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 10,
-      marginHorizontal: 25,
-      width: '100%',
-      borderRadius: 5,
-      alignSelf: 'center',
-    },
-    inf:{
-      color: '#808080',
-      fontSize: 14,
-    },
-    shaw:{
-      shadowOpacity: 0.30,
-      shadowOffset: {
-        width: 0,
-        height: 4,
-      },
-      shadowColor: '#000',
-      shadowRadius: 4.6,
-      elevation: 8,
-    },
-    
-    
-    
 });
