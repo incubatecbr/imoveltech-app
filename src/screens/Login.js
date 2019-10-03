@@ -18,8 +18,8 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username : '',
-      pass: '',
+      username : 'adm',
+      pass: '123',
       errors: 0
     }
   }
@@ -66,14 +66,14 @@ export default class Login extends Component {
               underlineColorAndroid='transparent'
               onChangeText={(pass) => this.setState({pass})}/>
         </View> */}
-        <View style={styles.inputCont}>
+        <View style={styles.inputContainer}>
           <TextInput style={styles.input}
               placeholder="Nome de usuário"
               underlineColorAndroid='transparent'
               onChangeText={(username) => this.setState({username})}/>
         </View>
 
-        <View style={styles.inputCont}>
+        <View style={styles.inputContainer}>
           <TextInput style={styles.input}
               placeholder="Senha"
               secureTextEntry={true}
@@ -82,7 +82,12 @@ export default class Login extends Component {
         </View>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onSubmitLoginUser()}>
-          <Text style={styles.loginText}>Login</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'center',  alignItems: 'center',}}>
+            <Icon name="check-square-o" size={14} color={'white'} style={{marginRight: 4}}/>
+            <Text style={styles.loginText}>Login</Text>
+          </View>
+          
+            
         </TouchableHighlight>
 {/* 
         <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('recoverypass')}>
@@ -112,7 +117,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 100,
   },
-  inputCont:{
+  inputContainer:{
     flexDirection: 'row',
     alignItems:'center',
     marginBottom: 30,
@@ -126,12 +131,11 @@ const styles = StyleSheet.create({
     borderColor: '#f2611d',  
   },
   buttonContainer: {
-    height:45,
-    flexDirection: 'row',
+    height:40,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom:20,
-    width:150,
+    width:130,
     borderRadius:30,
   },
   loginButton: {
