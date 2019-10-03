@@ -18,8 +18,8 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username : 'adm',
-      pass: '123',
+      username : '',
+      pass: '',
       errors: 0
     }
   }
@@ -50,7 +50,7 @@ export default class Login extends Component {
     return(
       <View style={styles.container}>
         <Image source={require('../images/logoApp.png')} style={styles.logoApp}/>
-        <View style={styles.inputContainer}>
+        {/* <View style={styles.inputContainer}>
           <Icon name="user" size={24} color={this.state.errors > 0 ? '#e31005': '#90cee0'} style={styles.inputIcon}/>
           <TextInput style={styles.inputs}
               placeholder="Nome de usuário"
@@ -61,6 +61,20 @@ export default class Login extends Component {
         <View style={styles.inputContainer}>
         <Icon name="lock" size={24} color={this.state.errors > 0 ? '#e31005': '#90cee0'} style={styles.inputIcon}/>
           <TextInput style={styles.inputs}
+              placeholder="Senha"
+              secureTextEntry={true}
+              underlineColorAndroid='transparent'
+              onChangeText={(pass) => this.setState({pass})}/>
+        </View> */}
+        <View style={styles.inputCont}>
+          <TextInput style={styles.input}
+              placeholder="Nome de usuário"
+              underlineColorAndroid='transparent'
+              onChangeText={(username) => this.setState({username})}/>
+        </View>
+
+        <View style={styles.inputCont}>
+          <TextInput style={styles.input}
               placeholder="Senha"
               secureTextEntry={true}
               underlineColorAndroid='transparent'
@@ -91,34 +105,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
+    //backgroundColor: '#DCDCDC',
+    backgroundColor: '#FFF',
   },
   logoApp:{
     width: 200,
-    height: 200,
+    height: 100,
   },
-  inputContainer: {
-      borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
-      borderRadius:30,
-      borderBottomWidth: 1,
-      width:250,
-      height:45,
-      marginBottom:20,
-      flexDirection: 'row',
-      alignItems:'center',
+  inputCont:{
+    flexDirection: 'row',
+    alignItems:'center',
+    marginBottom: 30,
   },
-  inputs:{
-      height:45,
-      marginLeft:16,
-      borderBottomColor: '#FFFFFF',
-      flex:1,
-  },
-  inputIcon:{
-    width:30,
-    height:30,
-    marginLeft:15,
-    justifyContent: 'center'
+  input:{
+    padding: 0,
+    width:  '50%',
+    textAlign: 'center', 
+    height: 35,  
+    borderBottomWidth: 2,
+    borderColor: '#f2611d',  
   },
   buttonContainer: {
     height:45,
