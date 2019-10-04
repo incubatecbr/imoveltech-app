@@ -3,32 +3,35 @@ import { SafeAreaView, ScrollView, View, StyleSheet, Text, TextInput, TouchableO
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-import { openDatabase } from 'react-native-sqlite-storage';
+//import { openDatabase } from 'react-native-sqlite-storage';
 //Connction to access the pre-populated user_db.db '~/www/testeDB.db'
-var db = openDatabase({ name: 'testeDB.db',  createFromLocation: 1,});
+//var db = openDatabase({ name: 'testeDB.db',  createFromLocation: 1,});
 
 
 export default class NewAd extends Component {   
     constructor(props) {
         super(props);
         this.state = {
+          titleAd: null,
+          sizeHome: null,
+          bedrooms: null,
+          suites: null,
+          sizeRecreation: null,
           checkPool: null,
-          FlatListItems: [],
+          garagem: null,
         };
-        db.transaction(tx => {
-            tx.executeSql('SELECT * FROM user', [], (tx, results) => {
-              var temp = [];
-              for (let i = 0; i < results.rows.length; ++i) {
-                temp.push(results.rows.item(i));
-              }
-                console.log(temp);
-                //this.setState({FlatListItems: temp});
-            });
-        });
+
+        // db.transaction(tx => {
+        //     tx.executeSql('SELECT * FROM user', [], (tx, results) => {
+        //       var temp = [];
+        //       for (let i = 0; i < results.rows.length; ++i) {
+        //         temp.push(results.rows.item(i));
+        //       }
+        //         //console.log(temp);
+        //         this.setState({FlatListItems: temp});
+        //     });
+        // });
     }
-
-
-    
 
     static navigationOptions = {
         tabBarIcon: ({tintColor, activeTintColor}) => (
@@ -36,39 +39,68 @@ export default class NewAd extends Component {
         )
     };
 
+    onSubmitAd = () => {
+        //validation
+        if(this.onValidateData() === true){
+            console.log('Send db');
+            console.log(this.state);
+        }
+    }
 
+    onValidateData = () => {
+        let e = null;
+        let arr = this.state;
+        for(var i in arr){
+            if(arr[i] === null){
+               e = true;
+            }
+        }
+        if(e != true){
+            return true;
+        }else{
+            Alert.alert('Por favor preencha todos os campos.');
+        } 
+    }
 
   
   render() {
     return(
         <SafeAreaView>
              <ScrollView>
-                
                 <View style={styles.container}>
                 <Text style={styles.txtInfoTop}> Preencha todos os campos para anúnciar novo imovél </Text> 
                     <TextInput style={styles.input}
-                        placeholder="Titulo anuncio"
-                        underlineColorAndroid='transparent'/>
+                        placeholder="Titulo anúncio"
+                        underlineColorAndroid='transparent'
+                        onChangeText={(titleAd) => this.setState({titleAd})}/>
 
                     <TextInput style={styles.input}
-                        placeholder="Tamanho da casa m²"
+                        placeholder="Tamanho da casa em m²"
+                        maxLength={3}
                         keyboardType={'numeric'}
-                        underlineColorAndroid='transparent'/>
+                        underlineColorAndroid='transparent'
+                        onChangeText={(sizeHome) => this.setState({sizeHome})}/>
 
                     <TextInput style={styles.input}
                         placeholder="Quantidade de quartos"
+                        maxLength={1}
                         keyboardType={'numeric'}
-                        underlineColorAndroid='transparent'/>
+                        underlineColorAndroid='transparent'
+                        onChangeText={(bedrooms) => this.setState({bedrooms})}/>
 
                     <TextInput style={styles.input}
                         placeholder="Quantidade de suítes"
+                        maxLength={1}
                         keyboardType={'numeric'}
-                        underlineColorAndroid='transparent'/>
+                        underlineColorAndroid='transparent'
+                        onChangeText={(suites) => this.setState({suites})}/>
 
                     <TextInput style={styles.input}
-                        placeholder="Tamanho da área de lazer"
+                        placeholder="Tamanho da área de lazer em m²"
+                        maxLength={3}
                         keyboardType={'numeric'}
-                        underlineColorAndroid='transparent'/>
+                        underlineColorAndroid='transparent'
+                        onChangeText={(sizeRecreation) => this.setState({sizeRecreation})}/>
 
                 
                     <Text>Possui piscina ?</Text>
@@ -85,20 +117,16 @@ export default class NewAd extends Component {
 
                     <TextInput style={styles.input}
                         placeholder="Quantidade de vagas na garagem"
+                        maxLength={1}
                         keyboardType={'numeric'}
-                        underlineColorAndroid='transparent'/>
+                        underlineColorAndroid='transparent'
+                        onChangeText={(garagem) => this.setState({garagem})}/>
 
-                    <TouchableHighlight style={styles.btn} onPress={() => {
-                        this.manager.createTable().then( (val) => {
-                            Alert.alert('ok');
-                        }).catch( (err) => { 
-                            Alert.alert('error...');
-                        })
-                    }}>
+                    <TouchableHighlight style={styles.btn} onPress={() => this.onSubmitAd()}>
                         <Text style={{color: 'white'}}> <Icon name="check-square-o" size={14} color={'white'}/> Anunciar</Text>
                     </TouchableHighlight>
 
-                    <Text style={{color: 'blue'}}> {this.state.FlatListItems}</Text>
+                   
 
                 </View>
              </ScrollView>
@@ -121,11 +149,12 @@ const styles = StyleSheet.create({
     },
     input: {
         padding: 0,
-        width:  '90%',
+        width:  '70%',
         textAlign: 'center', 
         height: 35,  
-        borderRadius: 10,  
-        borderWidth: 2,  
+        //borderRadius: 10,  
+        //borderWidth: 2,  
+        borderBottomWidth: 2,
         borderColor: '#d57900',  
         //marginBottom: 10
         margin: 5,
