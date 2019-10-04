@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Text, TouchableHighlight, StyleSheet } from 'react-native';
-import { Dimensions } from 'react-native';
+import { View, Image, Text, TouchableHighlight, StyleSheet, Dimensions, Alert } from 'react-native';
 
 class Card extends Component {
   render() {
