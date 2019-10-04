@@ -11,8 +11,7 @@ import Login from './screens/Login';
 import Home from './screens/Home';
 import Perfil from './screens/Profile';
 import NewAd from './screens/NewAd';
-
-
+import RegisterUser from './screens/NewUser';
 //-------
 
 const colorIcons = "#f2611d"
@@ -72,12 +71,9 @@ const AppDrawerNavigator = createDrawerNavigator({
 
 const AppSwitchNavigator = createSwitchNavigator({
   Index: { screen: Login },
-  Dashboard: { screen: AppDrawerNavigator }
+  Dashboard: { screen: AppDrawerNavigator },
+  NewRegister: { screen: RegisterUser }
+  
 });
-
 const AppContainer = createAppContainer(AppSwitchNavigator);
-
 export default AppContainer;
-
-
-
