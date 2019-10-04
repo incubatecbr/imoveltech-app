@@ -24,9 +24,6 @@ export default class Login extends Component {
     }
   }
 
-  onClickListener = (viewId) => {
-    Alert.alert("Alert", "Button pressed "+viewId);
-  }
 
   onSubmitLoginUser = () => {
     if(this.state.username != '' || this.state.pass != ''){
@@ -92,11 +89,11 @@ export default class Login extends Component {
 {/* 
         <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('recoverypass')}>
             <Text>Esqueceu sua senha?</Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('register')}>
-            <Text>Cadastre-se</Text>
         </TouchableHighlight> */}
+
+        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.navigation.navigate('NewRegister')}>
+            <Text style={{color: '#3dbae0'}}>Cadastre-se</Text>
+        </TouchableHighlight> 
       </View>
     );
   }
