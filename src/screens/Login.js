@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Database from '../Database';
-const db = new Database();
-
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableHighlight,
-  Alert,
-  Image
-} from 'react-native';
+import Axios from 'axios';
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, Alert, Image } from 'react-native';
 
 
 export default class Login extends Component {
@@ -25,17 +15,16 @@ export default class Login extends Component {
   }
 
 
-  onSubmitLoginUser = () => {
+  onSubmitLoginUser = async() => {
     if(this.state.username != '' || this.state.pass != ''){
-      db.selectUser(this.state.username, this.state.pass ).then( (data) => {
-        if(data === false){
-          Alert.alert('Dados incorretos..');
-        }else{
-          this.props.navigation.navigate('Dashboard');
-        }
-      }).catch((err)=>{
-        console.warn(err);
-      });
+      const response = await Axios.post("http://192.168.100.154/imoveltech/login.php", {username: this.state.username, pass: this.state.pass});
+      const { data } = response;
+      if( data === true ){
+        this.props.navigation.navigate('Dashboard');
+      }else{
+        Alert.alert('Usuário ou senha inválidos.')
+      }
+
     }else{
       Alert.alert('Por favor preencha os campos para entrar');
       this.setState({errors : this.state.errors + 1 });
