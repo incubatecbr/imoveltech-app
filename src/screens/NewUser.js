@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, Alert } from 'react-native';
-
+import Axios from 'axios';
 
 export default class NewUser extends Component {
   constructor(props) {
@@ -12,11 +12,19 @@ export default class NewUser extends Component {
   }
 
 
-  onSubmitNewUser = () => {
+  onSubmitNewUser = async() => {
     if(this.state.username != '' || this.state.pass != ''){
-        Alert.alert('send to server');
+      const response = await Axios.post("http://192.168.100.154/imoveltech/", {class:'user', action:'newUser', user: this.state.username, pass: this.state.pass});
+      const { data } = response;  
+      console.log(data);
+      if( data === true){
+        Alert.alert('Usuário cadastrado com sucesso.');
+      }
+      if( data.indexOf('User') != -1){
+        Alert.alert('Nome Usuário cadastrado, por favor escolha outro...');
+      }
     }else{
-        Alert.alert('Por favor preencha os campos para entrar');
+      Alert.alert('Por favor preencha os campos para entrar');
     }
   }
 
