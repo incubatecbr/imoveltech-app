@@ -8,8 +8,8 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username : 'adm',
-      pass: '123',
+      username : '',
+      pass: '',
       errors: 0
     }
   }
@@ -17,7 +17,7 @@ export default class Login extends Component {
 
   onSubmitLoginUser = async() => {
     if(this.state.username != '' || this.state.pass != ''){
-      const response = await Axios.post("http://192.168.100.154/imoveltech/login.php", {username: this.state.username, pass: this.state.pass});
+      const response = await Axios.post("http://192.168.100.154/imoveltech/", {class:'user', action: 'verifyUser', username: this.state.username, pass: this.state.pass });
       const { data } = response;
       if( data === true ){
         this.props.navigation.navigate('Dashboard');
@@ -36,22 +36,7 @@ export default class Login extends Component {
     return(
       <View style={styles.container}>
         <Image source={require('../images/logoApp.png')} style={styles.logoApp}/>
-        {/* <View style={styles.inputContainer}>
-          <Icon name="user" size={24} color={this.state.errors > 0 ? '#e31005': '#90cee0'} style={styles.inputIcon}/>
-          <TextInput style={styles.inputs}
-              placeholder="Nome de usuário"
-              underlineColorAndroid='transparent'
-              onChangeText={(username) => this.setState({username})}/>
-        </View>
-        
-        <View style={styles.inputContainer}>
-        <Icon name="lock" size={24} color={this.state.errors > 0 ? '#e31005': '#90cee0'} style={styles.inputIcon}/>
-          <TextInput style={styles.inputs}
-              placeholder="Senha"
-              secureTextEntry={true}
-              underlineColorAndroid='transparent'
-              onChangeText={(pass) => this.setState({pass})}/>
-        </View> */}
+
         <View style={styles.inputContainer}>
           <TextInput style={styles.input}
               placeholder="Nome de usuário"
@@ -75,10 +60,10 @@ export default class Login extends Component {
           
             
         </TouchableHighlight>
-{/* 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('recoverypass')}>
+ 
+        {/* <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onTeste()}>
             <Text>Esqueceu sua senha?</Text>
-        </TouchableHighlight> */}
+        </TouchableHighlight>  */}
 
         <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.navigation.navigate('NewRegister')}>
             <Text style={{color: '#3dbae0'}}>Cadastre-se</Text>
