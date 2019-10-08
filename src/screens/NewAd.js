@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, View, StyleSheet, Text, TextInput, TouchableOpacity, TouchableHighlight, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Axios from 'axios';
 
 export default class NewAd extends Component {   
     constructor(props) {
@@ -11,7 +12,7 @@ export default class NewAd extends Component {
           bedrooms: null,
           suites: null,
           sizeRecreation: null,
-          checkPool: null,
+          pool: null,
           garagem: null,
         };
     }
@@ -22,11 +23,14 @@ export default class NewAd extends Component {
         )
     };
 
-    onSubmitAd = () => {
+    onSubmitAd = async() => {
         //validation
         if(this.onValidateData() === true){
-            console.log('Send db');
-            console.log(this.state);
+            //console.log('Send db');
+            //console.log(this.state);
+            const response = await Axios.post("http://192.168.100.154/imoveltech/", {class:'immobile', action:'add', data: this.state});
+            const { data } = response;
+            console.log(data);
         }
     }
 
@@ -89,12 +93,12 @@ export default class NewAd extends Component {
                 
                     <Text>Possui piscina ?</Text>
                     <View style={styles.radioGroup}>
-                        <TouchableOpacity style={styles.circle} onPress={() => this.setState({ checkPool: 'yes' })}> 
-                            { this.state.checkPool === 'yes' && (<View style={styles.checkedCircle} />) }
+                        <TouchableOpacity style={styles.circle} onPress={() => this.setState({ pool: 1 })}> 
+                            { this.state.pool === 1 && (<View style={styles.checkedCircle} />) }
                         </TouchableOpacity>
                         <Text style={{ marginHorizontal: 5 }}>Sim</Text>
-                        <TouchableOpacity style={styles.circle} onPress={() => this.setState({ checkPool: 'no' })}> 
-                            { this.state.checkPool === 'no' && (<View style={styles.checkedCircle} />) }
+                        <TouchableOpacity style={styles.circle} onPress={() => this.setState({ pool: 0 })}> 
+                            { this.state.pool === 0 && (<View style={styles.checkedCircle} />) }
                         </TouchableOpacity>
                         <Text style={{ marginHorizontal: 5 }}>Não</Text>
                     </View>
