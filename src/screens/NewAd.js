@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, View, StyleSheet, Text, TextInput, TouchableOpacity, TouchableHighlight, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
-//import { openDatabase } from 'react-native-sqlite-storage';
-//Connction to access the pre-populated user_db.db '~/www/testeDB.db'
-//var db = openDatabase({ name: 'testeDB.db',  createFromLocation: 1,});
-
-
 export default class NewAd extends Component {   
     constructor(props) {
         super(props);
@@ -20,17 +14,6 @@ export default class NewAd extends Component {
           checkPool: null,
           garagem: null,
         };
-
-        // db.transaction(tx => {
-        //     tx.executeSql('SELECT * FROM user', [], (tx, results) => {
-        //       var temp = [];
-        //       for (let i = 0; i < results.rows.length; ++i) {
-        //         temp.push(results.rows.item(i));
-        //       }
-        //         //console.log(temp);
-        //         this.setState({FlatListItems: temp});
-        //     });
-        // });
     }
 
     static navigationOptions = {
@@ -47,6 +30,7 @@ export default class NewAd extends Component {
         }
     }
 
+    //Function verify if any state empty
     onValidateData = () => {
         let e = null;
         let arr = this.state;
