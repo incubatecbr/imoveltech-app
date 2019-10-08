@@ -53,7 +53,7 @@ const DashboardStackNavigator = createStackNavigator(
         headerRight: (
           <Icon
             style={{ paddingRight: 10, color: colorIcons }}
-            onPress={() => Alert.alert('Logout..')}
+            onPress={() => navigation.navigate('Index')}
             name="power-off"
             size={22}
           />
