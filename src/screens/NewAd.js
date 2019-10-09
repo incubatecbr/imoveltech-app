@@ -11,6 +11,7 @@ export default class NewAd extends Component {
           sizeHome: null,
           bedrooms: null,
           suites: null,
+          wc: null,
           sizeRecreation: null,
           pool: null,
           garagem: null,
@@ -82,6 +83,13 @@ export default class NewAd extends Component {
                         keyboardType={'numeric'}
                         underlineColorAndroid='transparent'
                         onChangeText={(suites) => this.setState({suites})}/>
+
+                    <TextInput style={styles.input}
+                        placeholder="Quantidade de banheiros"
+                        maxLength={1}
+                        keyboardType={'numeric'}
+                        underlineColorAndroid='transparent'
+                        onChangeText={(wc) => this.setState({wc})}/>
 
                     <TextInput style={styles.input}
                         placeholder="Tamanho da área de lazer em m²"
