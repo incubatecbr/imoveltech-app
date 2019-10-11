@@ -4,6 +4,7 @@ import {ScrollView, SafeAreaView, FlatList, Text} from 'react-native';
 import Card from '../components/Card';
 import Axios from 'axios';
 
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +15,6 @@ export default class Home extends Component {
     const response = await Axios.post("http://192.168.100.154/imoveltech/", {class:'immobile', action:'list'});
     const { data } = response;
     this.setState({immobiles: data});
-    console.log(data);
   }
   //Bottom Navigation
   static navigationOptions = {
@@ -29,7 +29,7 @@ export default class Home extends Component {
           <ScrollView>
             <FlatList
               data={this.state.immobiles}
-              keyExtractor={item => item.id_}             //`data:image/gif;base64,${encodedData}` 
+              keyExtractor={item => item.id_}         
               renderItem={({item}) =>  <Card imgPath={{uri: `data:image/gif;base64,${item.img_base64}`}} price={item.sale_price} end={item.address_home} cod={item.id_} />}
             />
           </ScrollView>
