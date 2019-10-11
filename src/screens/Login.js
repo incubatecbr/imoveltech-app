@@ -8,10 +8,11 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username : 'adm',
+      username : 'igor',
       pass: '123',
       errors: 0
     }
+    global._IDuser = null;
   }
 
 
@@ -19,7 +20,9 @@ export default class Login extends Component {
     if(this.state.username != '' || this.state.pass != ''){
       const response = await Axios.post("http://192.168.100.154/imoveltech/", {class:'user', action: 'verifyUser', username: this.state.username, pass: this.state.pass });
       const { data } = response;
-      if( data === true ){
+      
+      if( data.indexOf(true) ){
+        global._IDuser = data[0];
         this.props.navigation.navigate('Dashboard');
       }else{
         Alert.alert('Usuário ou senha inválidos.')
@@ -30,7 +33,6 @@ export default class Login extends Component {
       this.setState({errors : this.state.errors + 1 });
     }
   }
-
 
   render() {
     return(
@@ -57,13 +59,7 @@ export default class Login extends Component {
             <Icon name="check-square-o" size={14} color={'white'} style={{marginRight: 4}}/>
             <Text style={styles.loginText}>Login</Text>
           </View>
-          
-            
         </TouchableHighlight>
- 
-        {/* <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onTeste()}>
-            <Text>Esqueceu sua senha?</Text>
-        </TouchableHighlight>  */}
 
         <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.navigation.navigate('NewRegister')}>
             <Text style={{color: '#3dbae0'}}>Cadastre-se</Text>
@@ -81,7 +77,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    //backgroundColor: '#DCDCDC',
     backgroundColor: '#FFF',
   },
   logoApp:{
