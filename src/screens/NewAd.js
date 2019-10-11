@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, View, StyleSheet, Text, TextInput, TouchableOpacity, TouchableHighlight, FlatList, Alert, Image } from 'react-native';
+import { SafeAreaView, ScrollView, View, StyleSheet, Text, TextInput, TouchableOpacity, TouchableHighlight, Alert, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Axios from 'axios';
 import ImagePicker from 'react-native-image-picker';
@@ -16,9 +16,12 @@ export default class NewAd extends Component {
           sizeRecreation: null,
           pool: null,
           garagem: null,
+          address_h: null,
+          idUser: global._IDuser,
           sourceImg: null,
           base64Img: null,
         };
+        this.baseState = this.state;
     }
 
     static navigationOptions = {
@@ -30,14 +33,15 @@ export default class NewAd extends Component {
     onSubmitAd = async() => {
         //validation
         if(this.onValidateData() === true){
-            //console.log('Send db');
-            //console.log(this.state);
-            //{class:'immobile', action:'add', data: this.state}
-            //{header: {Authorization: "Bearer access-token", 'Content-Type': 'multipart/form-data'} }
-            //send json form
             const response = await Axios.post("http://192.168.100.154/imoveltech/",{class:'immobile', action:'add', data: this.state});
             const { data } = response;
             console.log(data);
+            if( data == true){
+                Alert.alert('Imovel anunciado.');
+                this.setState(this.baseState);
+            }else{
+                Alert.alert(data);
+            }
         }
     }
 
@@ -59,7 +63,6 @@ export default class NewAd extends Component {
 
     selectPhotoTapped = () => {
         const options = {
-          quality: 1.0,
           maxWidth: 500,
           maxHeight: 500,
           mediaType: 'photo',
@@ -69,19 +72,15 @@ export default class NewAd extends Component {
         };
     
         ImagePicker.showImagePicker(options, response => {
-          //console.log('Response = ', response);
           if (response.error) {
             console.warn('ImagePicker Error: ', response.error);
           } else {
             let source = {uri: response.uri};
-            // You can also display the image using data:
-            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
             this.setState({ 
                 sourceImg: source,
                 base64Img: response.data
               });
           }
-
         });
     }
 
@@ -95,13 +94,21 @@ export default class NewAd extends Component {
                     <TextInput style={styles.input}
                         placeholder="Titulo anúncio"
                         underlineColorAndroid='transparent'
+                        value={this.state.titleAd}
                         onChangeText={(titleAd) => this.setState({titleAd})}/>
+
+                    <TextInput style={styles.input}
+                        placeholder="Endereço, numero, cidade-ESTADO"
+                        underlineColorAndroid='transparent'
+                        value={this.state.address_h}
+                        onChangeText={(address_h) => this.setState({address_h})}/>
 
                     <TextInput style={styles.input}
                         placeholder="Tamanho da casa em m²"
                         maxLength={3}
                         keyboardType={'numeric'}
                         underlineColorAndroid='transparent'
+                        value={this.state.sizeHome}
                         onChangeText={(sizeHome) => this.setState({sizeHome})}/>
 
                     <TextInput style={styles.input}
@@ -109,6 +116,7 @@ export default class NewAd extends Component {
                         maxLength={1}
                         keyboardType={'numeric'}
                         underlineColorAndroid='transparent'
+                        value={this.state.bedrooms}
                         onChangeText={(bedrooms) => this.setState({bedrooms})}/>
 
                     <TextInput style={styles.input}
@@ -116,6 +124,7 @@ export default class NewAd extends Component {
                         maxLength={1}
                         keyboardType={'numeric'}
                         underlineColorAndroid='transparent'
+                        value={this.state.suites}
                         onChangeText={(suites) => this.setState({suites})}/>
 
                     <TextInput style={styles.input}
@@ -123,6 +132,7 @@ export default class NewAd extends Component {
                         maxLength={1}
                         keyboardType={'numeric'}
                         underlineColorAndroid='transparent'
+                        value={this.state.wc}
                         onChangeText={(wc) => this.setState({wc})}/>
 
                     <TextInput style={styles.input}
@@ -130,6 +140,7 @@ export default class NewAd extends Component {
                         maxLength={3}
                         keyboardType={'numeric'}
                         underlineColorAndroid='transparent'
+                        value={this.state.sizeRecreation}
                         onChangeText={(sizeRecreation) => this.setState({sizeRecreation})}/>
 
                 
@@ -150,6 +161,7 @@ export default class NewAd extends Component {
                         maxLength={1}
                         keyboardType={'numeric'}
                         underlineColorAndroid='transparent'
+                        value={this.state.garagem}
                         onChangeText={(garagem) => this.setState({garagem})}/>
 
                     <Text>Clique abaixo para adicionar fotos do imovel</Text>
@@ -169,9 +181,6 @@ export default class NewAd extends Component {
                     <TouchableHighlight style={styles.btn} onPress={() => this.onSubmitAd()}>
                         <Text style={{color: 'white'}}> <Icon name="check-square-o" size={14} color={'white'}/> Anunciar</Text>
                     </TouchableHighlight>
-
-                   
-
                 </View>
              </ScrollView>
         </SafeAreaView>
@@ -188,7 +197,6 @@ const styles = StyleSheet.create({
     },
     txtInfoTop:{
         marginVertical: 20,
-        //marginHorizontal: 20,
         color: '#808080',
     },
     input: {
@@ -196,11 +204,8 @@ const styles = StyleSheet.create({
         width:  '70%',
         textAlign: 'center', 
         height: 35,  
-        //borderRadius: 10,  
-        //borderWidth: 2,  
         borderBottomWidth: 2,
         borderColor: '#d57900',  
-        //marginBottom: 10
         margin: 5,
         fontSize: 16,
     },
@@ -230,6 +235,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
+        marginBottom: 10,
         marginHorizontal: 25,
         width: '60%',
         borderRadius: 5,
@@ -239,7 +245,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 2,
         borderWidth: 1,
         borderColor: 'black',
-        width: 200,
+        width: 340,
         height: 200,
     },
 });
