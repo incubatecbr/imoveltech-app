@@ -14,6 +14,7 @@ export default class Home extends Component {
     const response = await Axios.post("http://192.168.100.154/imoveltech/", {class:'immobile', action:'list'});
     const { data } = response;
     this.setState({immobiles: data});
+    console.log(data);
   }
   //Bottom Navigation
   static navigationOptions = {
@@ -28,8 +29,8 @@ export default class Home extends Component {
           <ScrollView>
             <FlatList
               data={this.state.immobiles}
-              keyExtractor={item => item.id_}
-              renderItem={({item}) =>  <Card imgPath={{uri: `http://192.168.100.154/imoveltech/${item.path_folder}`}} price={item.sale_price} end={item.address_home} cod={item.id_} />}
+              keyExtractor={item => item.id_}             //`data:image/gif;base64,${encodedData}` 
+              renderItem={({item}) =>  <Card imgPath={{uri: `data:image/gif;base64,${item.img_base64}`}} price={item.sale_price} end={item.address_home} cod={item.id_} />}
             />
           </ScrollView>
         </SafeAreaView>
