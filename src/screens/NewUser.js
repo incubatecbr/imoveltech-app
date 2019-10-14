@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, Alert } from 'react-native';
-import Axios from 'axios';
+import Api from '../Api';
 
 export default class NewUser extends Component {
   constructor(props) {
@@ -14,9 +14,8 @@ export default class NewUser extends Component {
 
   onSubmitNewUser = async() => {
     if(this.state.username != '' || this.state.pass != ''){
-      const response = await Axios.post("http://192.168.100.154/imoveltech/", {class:'user', action:'newUser', user: this.state.username, pass: this.state.pass});
+      const response = await Api.post("/", {class:'user', action:'newUser', user: this.state.username, pass: this.state.pass});
       const { data } = response;  
-      console.log(data);
       if( data === true){
         Alert.alert('Usuário cadastrado com sucesso.');
       }

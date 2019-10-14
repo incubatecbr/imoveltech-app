@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, View, StyleSheet, Text, TextInput, TouchableOpacity, TouchableHighlight, Alert, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Axios from 'axios';
+import Api from '../Api';
 import ImagePicker from 'react-native-image-picker';
 
 export default class NewAd extends Component {   
@@ -33,7 +33,7 @@ export default class NewAd extends Component {
     onSubmitAd = async() => {
         //validation
         if(this.onValidateData() === true){
-            const response = await Axios.post("http://192.168.100.154/imoveltech/",{class:'immobile', action:'add', data: this.state});
+            const response = await Api.post("/",{class:'immobile', action:'add', data: this.state});
             const { data } = response;
             console.log(data);
             if( data == true){

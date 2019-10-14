@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Api from '../Api';
+
 import {
     StyleSheet,
     Text,
     View,
     ScrollView,
     SafeAreaView,
-    TouchableHighlight, 
     FlatList,
     Alert
   } from 'react-native';
 
 export default class Profile extends Component {
+
+    componentDidMount(){
+
+    }
 
     static navigationOptions = {
       tabBarIcon: ({tintColor, activeTintColor}) => (
@@ -51,7 +56,7 @@ export default class Profile extends Component {
                             <Icon name="trash-o" size={20} color={'#f2611d'} onPress={() => Alert.alert('excluir '+item.title+'?')}/> 
                         </View>
                     )}
-                    keyExtractor={item => item.id}
+                    keyExtractor={(item) => item.id.toString() }
                 />
             </ScrollView>
         </SafeAreaView>

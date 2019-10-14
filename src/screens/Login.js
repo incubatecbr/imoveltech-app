@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Axios from 'axios';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, Alert, Image } from 'react-native';
-
+import Api from '../Api';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username : 'igor',
+      username : 'adm',
       pass: '123',
       errors: 0
     }
@@ -18,7 +17,7 @@ export default class Login extends Component {
 
   onSubmitLoginUser = async() => {
     if(this.state.username != '' || this.state.pass != ''){
-      const response = await Axios.post("http://192.168.100.154/imoveltech/", {class:'user', action: 'verifyUser', username: this.state.username, pass: this.state.pass });
+      const response = await Api.post("/", {class:'user', action: 'verifyUser', username: this.state.username, pass: this.state.pass });
       const { data } = response;
       
       if( data.indexOf(true) ){

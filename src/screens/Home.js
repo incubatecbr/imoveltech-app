@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ScrollView, SafeAreaView, FlatList, Text} from 'react-native';
 import Card from '../components/Card';
-import Axios from 'axios';
+import Api from '../Api';
 
 
 export default class Home extends Component {
@@ -12,7 +12,7 @@ export default class Home extends Component {
   }
 
   async componentDidMount(){
-    const response = await Axios.post("http://192.168.100.154/imoveltech/", {class:'immobile', action:'list'});
+    const response = await Api.post("/", {class:'immobile', action:'list'});
     const { data } = response;
     this.setState({immobiles: data});
   }
