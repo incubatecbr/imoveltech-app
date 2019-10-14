@@ -13,9 +13,19 @@ import {
   } from 'react-native';
 
 export default class Profile extends Component {
-
-    componentDidMount(){
-
+    constructor(props){
+        super(props);
+        this.state = {
+            idUser: global._IDuser,
+            list: null,
+            num_Immobile: null,
+        }
+    }
+    async componentDidMount(){
+        const response = await Api.post("/", {class:'immobile', action: 'immobilesUser', id: this.state.idUser});
+        const { data } = response;
+        console.log(data);
+        this.setState({list: data, num_Immobile: data.length});
     }
 
     static navigationOptions = {
@@ -25,39 +35,30 @@ export default class Profile extends Component {
     };
 
     render() {
-        const data = [
-            {
-                id: 1,
-                title: 'Casa 1',
-            },
-            {
-                id: 2,
-                title: 'Casa 2',
-            },
-            {
-                id: 3,
-                title: 'Casa 3',
-            },
-        ];
-     
+        
       return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 <View style={styles.user}>
                     <Icon name="user-circle" size={60} color={'#f2611d'} style={styles.imgUser}/>
                     <Text style={styles.nameUser}> Nome Usuario </Text> 
-                    <Text style={styles.nameUser}> Imóveis anunciados: {data.length} </Text> 
+                    <Text style={styles.nameUser}> Imóveis anunciados: {this.state.num_Immobile === null ? ('0') : (this.state.num_Immobile)} </Text> 
                 </View>
-                <FlatList
-                    data={data}
+                { this.state.num_Immobile === null ? (
+                     <Text style={{fontSize: 12, color: 'grey'}}> NULOOOOOOOOOOOOO </Text>
+                ) : (
+                    <FlatList
+                    data={this.state.list}
                     renderItem={({ item }) => (
                         <View style={styles.item}>
-                            <Text style={styles.text}> {item.title} </Text>
-                            <Icon name="trash-o" size={20} color={'#f2611d'} onPress={() => Alert.alert('excluir '+item.title+'?')}/> 
+                            <Text style={styles.text}> {item.title_ad} </Text>
+                            <Icon name="trash-o" size={20} color={'#f2611d'} onPress={() => Alert.alert('excluir '+item.title_ad+'?')}/> 
                         </View>
                     )}
-                    keyExtractor={(item) => item.id.toString() }
-                />
+                    keyExtractor={(item) => item.id_ }
+                    /> 
+                )}
+
             </ScrollView>
         </SafeAreaView>
       );
