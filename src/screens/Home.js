@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {ScrollView, SafeAreaView, FlatList, Text} from 'react-native';
+import {ScrollView, SafeAreaView, FlatList, Text, Alert} from 'react-native';
 import Card from '../components/Card';
 import Api from '../Api';
 
@@ -19,7 +19,7 @@ export default class Home extends Component {
   //Bottom Navigation
   static navigationOptions = {
     tabBarIcon: ({tintColor, activeTintColor}) => (
-      <Icon name="home" size={22} color={'#f2611d'} />
+      <Icon name="home" size={22} color={'#f2611d'}/>
     )
   };
   
