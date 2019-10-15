@@ -35,7 +35,6 @@ export default class NewAd extends Component {
         if(this.onValidateData() === true){
             const response = await Api.post("/",{class:'immobile', action:'add', data: this.state});
             const { data } = response;
-            console.log(data);
             if( data == true){
                 Alert.alert('Imovel anunciado.');
                 this.setState(this.baseState);
