@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { ConfirmDialog } from 'react-native-simple-dialogs';
 import Api from '../Api';
-
-import {
-    StyleSheet,
-    Text,
-    View,
-    ScrollView,
-    SafeAreaView,
-    FlatList,
-    Alert
-  } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, FlatList} from 'react-native';
 
 export default class Profile extends Component {
     constructor(props){
@@ -19,6 +11,8 @@ export default class Profile extends Component {
             idUser: global._IDuser,
             list: null,
             msg: null,
+            dialogDelete: false,
+            idImmobile: null,
         }
     }
     async componentDidMount(){
@@ -28,6 +22,18 @@ export default class Profile extends Component {
             this.setState({msg: data.msg});
         }else{
             this.setState({list: data[0], num_Immobile: data.length});
+        }
+    }
+
+    onDeleteImmobile = async() => {
+        const response = await Api.post("/", {class:'immobile', action: 'delete', id: this.state.idImmobile});
+        const { data } = response;
+        if(data === true){
+            const nList = this.state.list.filter(item => item.id_ !== this.state.idImmobile);
+            this.setState({list: nList});
+            this.setState({dialogDelete: false});
+        }else{
+            Alert.alert(data);
         }
     }
 
@@ -54,14 +60,28 @@ export default class Profile extends Component {
                     data={this.state.list}
                     renderItem={({ item }) => (
                         <View style={styles.item}>
-                            <Text style={styles.text}> {item.title_ad} </Text>
-                            <Icon name="trash-o" size={20} color={'#f2611d'} onPress={() => Alert.alert('excluir '+item.title_ad+'?')}/> 
+                            <Text style={styles.text}> {item.title_ad} </Text>  
+                            <Icon name="trash-o" size={20} color={'#f2611d'} onPress={() => this.setState({dialogDelete: true, idImmobile:item.id_  })}/> 
                         </View>
                     )}
                     keyExtractor={(item) => item.id_ }
                     /> 
                 )}
-
+                
+                <ConfirmDialog
+                    title="Deseja excluir?"
+                    message="Você deseja excluir esse imóvel ?"
+                    visible={this.state.dialogDelete}
+                    onTouchOutside={() => this.setState({dialogDelete: false})}
+                    positiveButton={{
+                        title: "SIM",
+                        onPress: () => this.onDeleteImmobile()
+                    }}
+                    negativeButton={{
+                        title: "NÃO",
+                        onPress: () => this.setState({dialogDelete: false})
+                    }}
+                />
             </ScrollView>
         </SafeAreaView>
       );
