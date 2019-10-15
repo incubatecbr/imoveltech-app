@@ -18,14 +18,17 @@ export default class Profile extends Component {
         this.state = {
             idUser: global._IDuser,
             list: null,
-            num_Immobile: null,
+            msg: null,
         }
     }
     async componentDidMount(){
         const response = await Api.post("/", {class:'immobile', action: 'immobilesUser', id: this.state.idUser});
         const { data } = response;
-        console.log(data);
-        this.setState({list: data, num_Immobile: data.length});
+        if(data.msg){
+            this.setState({msg: data.msg});
+        }else{
+            this.setState({list: data[0], num_Immobile: data.length});
+        }
     }
 
     static navigationOptions = {
@@ -42,10 +45,10 @@ export default class Profile extends Component {
                 <View style={styles.user}>
                     <Icon name="user-circle" size={60} color={'#f2611d'} style={styles.imgUser}/>
                     <Text style={styles.nameUser}> Nome Usuario </Text> 
-                    <Text style={styles.nameUser}> Imóveis anunciados: {this.state.num_Immobile === null ? ('0') : (this.state.num_Immobile)} </Text> 
+                    <Text style={styles.nameUser}> Imóveis anunciados: {this.state.list === null ? ('0') : (this.state.list.length)} </Text> 
                 </View>
-                { this.state.num_Immobile === null ? (
-                     <Text style={{fontSize: 12, color: 'grey'}}> NULOOOOOOOOOOOOO </Text>
+                { this.state.list === null ? (
+                     <Text style={{fontSize: 12, color: 'grey'}}> {this.state.msg}  </Text>
                 ) : (
                     <FlatList
                     data={this.state.list}
