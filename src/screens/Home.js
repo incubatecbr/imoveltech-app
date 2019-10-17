@@ -15,6 +15,7 @@ export default class Home extends Component {
     const response = await Api.post("/", {class:'immobile', action:'list'});
     const { data } = response;
     this.setState({immobiles: data});
+    this.props.navigation.setParams({ cControll: 0});//controll for force remount.
   }
   //Bottom Navigation
   static navigationOptions = {
@@ -29,8 +30,8 @@ export default class Home extends Component {
           <ScrollView>
             <FlatList
               data={this.state.immobiles}
-              keyExtractor={item => item.id_}         
-              renderItem={({item}) =>  <Card imgPath={{uri: `data:image/gif;base64,${item.img_base64}`}} price={item.sale_price} end={item.address_home} cod={item.id_} />}
+              keyExtractor={item => item.id_}
+              renderItem={({item}) =>  <Card  imgPath={{uri: `data:image/gif;base64,${item.img_base64}`}} price={item.sale_price} end={item.address_home} cod={item.id_} />}
             />
           </ScrollView>
         </SafeAreaView>
