@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, Alert, Image } from 'react-native';
 import Api from '../Api';
+import Off from '../components/Offline';
 
 export default class Login extends Component {
   constructor(props) {
@@ -9,9 +10,15 @@ export default class Login extends Component {
     this.state = {
       username : 'adm',
       pass: '123',
-      errors: 0
+      errors: 0,
+      status: '',
     }
     global._IDuser = null;
+  }
+
+  
+  componentDidMount(){
+
   }
 
 
@@ -34,8 +41,12 @@ export default class Login extends Component {
   }
 
   render() {
+    
+   
+
     return(
       <View style={styles.container}>
+        <Off/>
         <Image source={require('../images/logoApp.png')} style={styles.logoApp}/>
 
         <View style={styles.inputContainer}>
@@ -63,6 +74,8 @@ export default class Login extends Component {
         <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.navigation.navigate('NewRegister')}>
             <Text style={{color: '#3dbae0'}}>Cadastre-se</Text>
         </TouchableHighlight> 
+
+          
       </View>
     );
   }
