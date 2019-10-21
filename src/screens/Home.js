@@ -40,10 +40,6 @@ export default class Home extends Component {
   
   
     render() {
-      // if( this.state.loading ){
-      //   return <Modal/>
-      // }
-
 
       return (
         <SafeAreaView style={{flex:1, backgroundColor:'#FFF'}}>
