@@ -20,7 +20,7 @@ export default class Home extends Component {
     const { data } = response;
     this.setState({immobiles: data});
     this.props.navigation.setParams({ cControll: 0});//controll for force remount.
-    this.sleepTest(2000).then( () => {
+    this.sleepTest(900).then( () => {
       this.setState({loading: false});
     });
   }
