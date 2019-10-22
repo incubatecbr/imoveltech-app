@@ -10,7 +10,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Login from './screens/Login';
 import Home from './screens/Home';
 import Perfil from './screens/Profile';
-import NewAd from './screens/NewAd';
+import Anunciar from './screens/NewAd';
 import RegisterUser from './screens/NewUser';
 import Details from './screens/Detalhes';
 //-------
@@ -26,7 +26,7 @@ const colorIcons = "#f2611d";
 const DashboardTabNavigator = createBottomTabNavigator(
   {
     Home,
-    NewAd,
+    Anunciar,
     Perfil
   }, 
   {
