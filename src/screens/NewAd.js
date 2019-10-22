@@ -89,7 +89,7 @@ export default class NewAd extends Component {
         <SafeAreaView>
              <ScrollView>
                 <View style={styles.container}>
-                <Text style={styles.txtInfoTop}> Preencha todos os campos para anúnciar novo imovél </Text> 
+                <Text style={styles.txtInfoTop}> Preencha todos os campos para anúnciar novo imóvel </Text> 
                     <TextInput style={styles.input}
                         placeholder="Titulo anúncio"
                         underlineColorAndroid='transparent'
@@ -163,7 +163,7 @@ export default class NewAd extends Component {
                         value={this.state.garagem}
                         onChangeText={(garagem) => this.setState({garagem})}/>
 
-                    <Text>Clique abaixo para adicionar fotos do imovel</Text>
+                    <Text>Clique abaixo para adicionar fotos do imóvel</Text>
                     <TouchableHighlight style={{marginVertical: 5}} onPress={() => this.selectPhotoTapped() }>
                         <View style={{flexDirection: 'row', padding: 10, borderWidth: 1, borderColor: '#d57900'}}>
                             <Icon name="plus" size={25} color={'grey'} style={{marginHorizontal:5}}/>
