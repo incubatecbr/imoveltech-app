@@ -49,7 +49,7 @@ export default class Home extends Component {
             <FlatList
               data={this.state.immobiles}
               keyExtractor={item => item.id_}
-              renderItem={({item}) =>  <Card  imgPath={{uri: `data:image/gif;base64,${item.img_base64}`}} price={item.sale_price} end={item.address_home} cod={item.id_} />}
+              renderItem={({item}) =>  <Card  imgPath={{uri: `data:image/gif;base64,${item.img_base64}`}} price={item.sale_price} end={item.address_home} cod={item.id_} nav={this.props.navigation}/>}
             />
           </ScrollView>
         </SafeAreaView>
