@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import { View, Image, Text, TouchableHighlight, StyleSheet, Dimensions, Alert } from 'react-native';
 
 class Card extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  viewDetails = (id) => {
+    this.props.nav.navigate('Detalhes',{
+      codImmobile: id,
+    });
+  }
+
   render() {
     //shadow card
     const shadowCard = {
@@ -20,11 +30,11 @@ class Card extends Component {
             <Image source={this.props.imgPath} style={styles.imgCard}/>
             <View style={styles.infCard}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ {this.props.price}</Text>
+                    <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ {this.props.price},00</Text>
                     <Text style={styles.inf}>Código: {this.props.cod}</Text>
                 </View>
                 <Text style={styles.inf}>{this.props.end}</Text>
-                <TouchableHighlight style={styles.buttonContainer} onPress={() => Alert.alert('click..')}>
+                <TouchableHighlight style={styles.buttonContainer} onPress={() => this.viewDetails( this.props.cod )}>
                     <Text style={{color: 'white'}}> + Informações</Text>
                 </TouchableHighlight>
             </View>
