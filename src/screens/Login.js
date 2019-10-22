@@ -16,17 +16,10 @@ export default class Login extends Component {
     global._IDuser = null;
   }
 
-  
-  componentDidMount(){
-
-  }
-
-
   onSubmitLoginUser = async() => {
     if(this.state.username != '' || this.state.pass != ''){
       const response = await Api.post("/", {class:'user', action: 'verifyUser', username: this.state.username, pass: this.state.pass });
       const { data } = response;
-      
       if( data.indexOf(true) ){
         global._IDuser = data[0];
         this.props.navigation.navigate('Dashboard');
@@ -41,14 +34,11 @@ export default class Login extends Component {
   }
 
   render() {
-    
-   
 
     return(
       <View style={styles.container}>
         <Off/>
         <Image source={require('../images/logoApp.png')} style={styles.logoApp}/>
-
         <View style={styles.inputContainer}>
           <TextInput style={styles.input}
               placeholder="Nome de usuário"
