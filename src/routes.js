@@ -12,6 +12,7 @@ import Home from './screens/Home';
 import Perfil from './screens/Profile';
 import NewAd from './screens/NewAd';
 import RegisterUser from './screens/NewUser';
+import Details from './screens/Detalhes';
 //-------
 //Reset for force remount component home.
 const resetAction = StackActions.reset({
@@ -21,7 +22,7 @@ const resetAction = StackActions.reset({
   ]
 });
 
-const colorIcons = "#f2611d"
+const colorIcons = "#f2611d";
 const DashboardTabNavigator = createBottomTabNavigator(
   {
     Home,
@@ -86,8 +87,8 @@ const AppDrawerNavigator = createDrawerNavigator({
 const AppSwitchNavigator = createSwitchNavigator({
   Index: { screen: Login },
   Dashboard: { screen: AppDrawerNavigator },
-  NewRegister: { screen: RegisterUser }
-  
+  NewRegister: { screen: RegisterUser },
+  Detalhes: { screen: Details },
 });
 const AppContainer = createAppContainer(AppSwitchNavigator);
 export default AppContainer;
