@@ -97,7 +97,7 @@ export default class NewAd extends Component {
                         onChangeText={(titleAd) => this.setState({titleAd})}/>
 
                     <TextInput style={styles.input}
-                        placeholder="Endereço, numero, cidade-ESTADO"
+                        placeholder="Endereço, numero, cidade-estado"
                         underlineColorAndroid='transparent'
                         value={this.state.address_h}
                         onChangeText={(address_h) => this.setState({address_h})}/>
@@ -143,7 +143,7 @@ export default class NewAd extends Component {
                         onChangeText={(sizeRecreation) => this.setState({sizeRecreation})}/>
 
                 
-                    <Text>Possui piscina ?</Text>
+                    <Text style={styles.font}>Possui piscina ?</Text>
                     <View style={styles.radioGroup}>
                         <TouchableOpacity style={styles.circle} onPress={() => this.setState({ pool: '1' })}> 
                             { this.state.pool === '1' && (<View style={styles.checkedCircle} />) }
@@ -152,7 +152,7 @@ export default class NewAd extends Component {
                         <TouchableOpacity style={styles.circle} onPress={() => this.setState({ pool: '0' })}> 
                             { this.state.pool === '0' && (<View style={styles.checkedCircle} />) }
                         </TouchableOpacity>
-                        <Text style={{ marginHorizontal: 5 }}>Não</Text>
+                        <Text style={{ marginHorizontal: 5, fontFamily:'Montserrat-Regular',}}>Não</Text>
                     </View>
 
                     <TextInput style={styles.input}
@@ -163,7 +163,7 @@ export default class NewAd extends Component {
                         value={this.state.garagem}
                         onChangeText={(garagem) => this.setState({garagem})}/>
 
-                    <Text>Clique abaixo para adicionar fotos do imóvel</Text>
+                    <Text style={styles.font}>Clique abaixo para adicionar fotos do imóvel</Text>
                     <TouchableHighlight style={{marginVertical: 5}} onPress={() => this.selectPhotoTapped() }>
                         <View style={{flexDirection: 'row', padding: 10, borderWidth: 1, borderColor: '#d57900'}}>
                             <Icon name="plus" size={25} color={'grey'} style={{marginHorizontal:5}}/>
@@ -172,13 +172,13 @@ export default class NewAd extends Component {
                     </TouchableHighlight>
                     
                     {this.state.sourceImg === null  ? (                                                                                                                            
-                        <Text style={{fontSize: 12, color: 'grey'}}>Escolha uma foto..</Text>
+                        <Text style={styles.txtPicker}>Escolha uma foto..</Text>
                     ) : (
                         <Image style={styles.imgPicker} source={this.state.sourceImg} /> 
                     )}
 
                     <TouchableHighlight style={styles.btn} onPress={() => this.onSubmitAd()}>
-                        <Text style={{color: 'white'}}> <Icon name="check-square-o" size={14} color={'white'}/> Anunciar</Text>
+                        <Text style={styles.txtBtn}> <Icon name="check-square-o" size={14} color={'white'}/> Anunciar</Text>
                     </TouchableHighlight>
                 </View>
              </ScrollView>
@@ -194,13 +194,29 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center', 
     },
+    font:{
+        fontFamily: 'Montserrat-Regular',
+    },
+    txtPicker:{
+        fontSize: 12, 
+        color: 'grey',
+        fontFamily: 'Montserrat-Regular',
+    },
+    txtBtn:{
+        fontFamily: 'Montserrat-Regular',
+        color: 'white'
+    },
     txtInfoTop:{
+        fontSize: 12,
+        fontFamily: 'Montserrat-Regular',
         marginVertical: 20,
         color: '#808080',
     },
     input: {
+        fontSize: 14,
+        fontFamily: 'Montserrat-Regular',
         padding: 0,
-        width:  '70%',
+        width:  '80%',
         textAlign: 'center', 
         height: 35,  
         borderBottomWidth: 2,

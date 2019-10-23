@@ -74,58 +74,57 @@ export default class Detalhes extends Component {
                     source={{ uri: `data:image/png;base64,${this.state.immobile.img_base64}`}}
                     style={styles.img}
                   />
-                  <Text style={{fontSize: 10, fontWeight: "500"}}>Valor do imóvel</Text>
+                  <Text style={styles.titlePrice}>Valor do imóvel</Text>
                   <View style={styles.viewPrice}>
-                    <Text style={{fontSize: 22, fontWeight: "700"}}>{this.state.immobile.sale_price},00</Text> 
+                    <Text style={styles.price}>{this.state.immobile.sale_price},00</Text> 
                     <IconM style={{marginTop: 4, fontWeight: "700"}} name="attach-money" size={24} color={'#f2611d'}/>
                   </View>
               </View>
 
               <View style={[styles.viewAddress, shadowCard]}>
-                <Text style={{fontSize: 10, fontWeight: "500"}}>Endereço:</Text>
+                <Text style={styles.titleAddress}>Endereço:</Text>
                 <Text style={styles.address}> <Icon name="address-card" size={22} color={'#f2611d'}/> {this.state.immobile.address_home}</Text> 
               </View>
               <View style={styles.row}>
                 <View style={[styles.icons, shadowCard]}>
                   <Icon name="bed" size={22} color={'#f2611d'}/>
-                  <Text>{this.state.immobile.bedrooms}</Text> 
+                  <Text style={styles.textInfo}>{this.state.immobile.bedrooms}</Text> 
                   <Text style={styles.text}>Quartos</Text> 
                 </View>
                 <View style={[styles.icons, shadowCard]}>
                 <IconI name="ios-bed" size={22} color={'#f2611d'}/>
-                  <Text>{this.state.immobile.suites}</Text> 
+                  <Text style={styles.textInfo}>{this.state.immobile.suites}</Text> 
                   <Text style={styles.text}>Suites</Text>
                 </View>
                 <View style={[styles.icons, shadowCard]}>
                   <IconM name="wc" size={22} color={'#f2611d'}/>
-                  <Text>{this.state.immobile.wc}</Text>
+                  <Text style={styles.textInfo}>{this.state.immobile.wc}</Text>
                   <Text style={styles.text}>WC</Text> 
                 </View>
                 <View style={[styles.icons, shadowCard]}>
                 <IconMCI name="garage" size={22} color={'#f2611d'}/>
-                  <Text>{this.state.immobile.garage}</Text> 
+                  <Text style={styles.textInfo}>{this.state.immobile.garage}</Text> 
                   <Text style={styles.text}>Garagem</Text>
                 </View>
               </View>
               <View style={styles.row}>
                 <View style={[styles.icons, shadowCard]}>
                   <IconS name="size-fullscreen" size={22} color={'#f2611d'}/>
-                  <Text>{this.state.immobile.size_m2_home}</Text> 
+                  <Text style={styles.textInfo}>{this.state.immobile.size_m2_home}</Text> 
                   <Text style={styles.text}>Área total m²</Text> 
                 </View>
                   <View style={[styles.icons, shadowCard]}>
                     <IconS name="size-actual" size={22} color={'#f2611d'}/>
-                    <Text>{this.state.immobile.size_m2_recreation}</Text> 
+                    <Text style={styles.textInfo}>{this.state.immobile.size_m2_recreation}</Text> 
                     <Text style={styles.text}>Área lazer m²</Text> 
                   </View>
               </View>
               
                 <TouchableOpacity style={styles.buttonContainer} onPress={() => this.props.navigation.navigate('Dashboard')}>
                     <IconB name="back" size={22} color={'#FFF'}/>
-                    <Text style={{color: 'white'}}>Voltar</Text>
+                    <Text style={{color: 'white', fontFamily: 'Montserrat-Regular', fontSize: 12}}>Voltar</Text>
                 </TouchableOpacity>
               
-              {/* <Button title="Voltar" style={{marginVertical: 5}} onPress={() => this.props.navigation.navigate('Dashboard')}/> */}
             </View>
           </ScrollView>
         </SafeAreaView>
@@ -156,7 +155,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center', 
   },
+  titleAddress:{
+    fontSize: 10, 
+    fontWeight: "500", 
+    fontFamily: 'Montserrat-Regular',
+  },
   address:{
+    fontFamily: 'Montserrat-Regular',
     fontSize: 12,
   },
   row:{
@@ -176,12 +181,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   title:{
+    fontFamily: 'Montserrat-Bold',
     fontSize: 20,
-    fontWeight: "700",
-    color: "#1a3f75",
     marginVertical: 10,
   },
   text:{
+    fontFamily: 'Montserrat-Regular',
     fontSize: 9,
   },
   img:{
@@ -191,6 +196,15 @@ const styles = StyleSheet.create({
   viewPrice:{
     flexDirection: 'row',
     marginVertical: 2,
+  },
+  price:{
+    fontSize: 22, 
+    fontFamily: 'Montserrat-Bold',
+  },
+  titlePrice:{
+    fontSize: 10, 
+    fontWeight: "600", 
+    fontFamily: 'Montserrat-Regular',
   },
   boxImg:{
     alignItems: 'center', 
@@ -210,5 +224,9 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 5,
     alignSelf: 'center',
+  },
+  textInfo:{
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 12,
   },
 });

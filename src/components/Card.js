@@ -30,12 +30,12 @@ class Card extends Component {
             <Image source={this.props.imgPath} style={styles.imgCard}/>
             <View style={styles.infCard}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={{fontSize: 15, color: 'black', fontWeight: 'bold'}}>R$ {this.props.price},00</Text>
+                    <Text style={styles.price}>R$ {this.props.price},00</Text>
                     <Text style={styles.inf}>Código: {this.props.cod}</Text>
                 </View>
                 <Text style={styles.inf}>{this.props.end}</Text>
                 <TouchableHighlight style={styles.buttonContainer} onPress={() => this.viewDetails( this.props.cod )}>
-                    <Text style={{color: 'white'}}> + Informações</Text>
+                    <Text style={{color: 'white', fontFamily: 'Montserrat-Regular', fontSize: 13}}> + Informações</Text>
                 </TouchableHighlight>
             </View>
         </View>
@@ -74,7 +74,14 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
     },
     inf:{
+      fontFamily: 'Montserrat-Italic',
       color: '#808080',
       fontSize: 14,
     },
+    price:{
+      fontSize: 15, 
+      color: 'black', 
+      fontFamily: 'Montserrat-Bold',
+    }
+    
 });

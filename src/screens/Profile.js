@@ -54,7 +54,7 @@ export default class Profile extends Component {
                     <Text style={styles.nameUser}> Imóveis anunciados: {this.state.list === null ? ('0') : (this.state.list.length)} </Text> 
                 </View>
                 { this.state.list === null ? (
-                     <Text style={{fontSize: 12, color: 'grey'}}> {this.state.msg}  </Text>
+                     <Text style={styles.font}> {this.state.msg}  </Text>
                 ) : (
                     <FlatList
                     data={this.state.list}
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
     },
     user:{
+        fontFamily: 'Montserrat-Regular',
         backgroundColor: '#C3C3C3',
         height: 200,
         alignItems: "center",
@@ -114,6 +115,15 @@ const styles = StyleSheet.create({
         padding: 10
     },
     text: {
+        fontFamily: 'Montserrat-Regular',
         color: "#333333"
-    }
+    },
+    nameUser:{
+        fontFamily: 'Montserrat-Regular',
+    },
+    font:{
+        fontSize: 12, 
+        color: 'grey',
+        fontFamily: 'Montserrat-Regular',
+    },
 });

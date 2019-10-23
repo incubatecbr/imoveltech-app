@@ -44,7 +44,7 @@ const DashboardTabNavigator = createBottomTabNavigator(
           height: 45,
         },
         headerTitle: "ImovelTech",
-        headerTitleStyle: { textAlign: 'center', flex: 1, fontSize: 15},
+        headerTitleStyle: { textAlign: 'center', flex: 1, fontSize: 15, fontFamily: 'Montserrat-Bold'},
       };
     },
     tabBarOptions: {

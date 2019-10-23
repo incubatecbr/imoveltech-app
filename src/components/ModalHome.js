@@ -34,5 +34,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#FFF',
+        fontFamily: 'Montserrat-Regular'
     }
 });
